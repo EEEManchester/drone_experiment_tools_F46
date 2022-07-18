@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch Mavros -->
+    
+    
+  <!-- Vion for F46 -->
+  <include file="$(find mavros)/launch/vicon_bridge vicon_f46_V2.launch">
+  </include>
+  
+  
+  <include file="$(find mocap_to_mavros_ex)/launch/mocap_to_mavros.launch">
+     <arg name="drone_name" default="Parl1/Parl1" />
+  </include>
+
+</launch>

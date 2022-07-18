@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch Mavros -->
+    <!--<include file="$(find drone_experiments)/launch/drone_exp_mavros.launch"/> -->
+    <arg name="drone_name" default="Parl1/Parl1" />
+
+    <!-- Run mocap to mavros node-->
+    <rosparam param="drone_name" subst_value="True">$(arg drone_name)</rosparam>
+    <rosparam param="external_vision_type">"vision"</rosparam>  <!--mocap-->
+    <node name="mocap_to_mavros" pkg="drone_experiments" type="mocap_to_drone_node" output="screen"/>
+
+</launch>
