@@ -41,11 +41,11 @@ int main(int argc, char *argv[])
 		nh.getParam("external_vision_type",external_vision_type);
 		if(external_vision_type=="vision")
 		{
-			pose_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/vision_pose/pose", 1);
+			pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/mavros/vision_pose/pose", 1);
 		}
 		else if(external_vision_type=="mocap")
 		{
-			pose_pub = nh.advertise<geometry_msgs::PoseStamped>("mavros/mocap/pose", 1);
+			pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/mavros/mocap/pose", 1);
 		}
 		else
 		{

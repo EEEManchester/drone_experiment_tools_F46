@@ -32,9 +32,17 @@ include_directories(
 )
 
 
-add_executable(drone_offboard_example_node src/off_board.cpp)
+add_executable(drone_offboard_node src/off_board.cpp)
 
 target_link_libraries(
-	drone_offboard_example_node
+	drone_offboard_node
+	${catkin_LIBRARIES}
+	)
+
+
+add_executable(drone_offboard_raw_node src/off_board_raw.cpp)
+
+target_link_libraries(
+	drone_offboard_raw_node
 	${catkin_LIBRARIES}
 	)

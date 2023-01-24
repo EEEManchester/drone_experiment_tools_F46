@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   vicon_bridge
 )
 
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 catkin_package(
 #  INCLUDE_DIRS include
@@ -34,4 +35,11 @@ add_executable(mocap_to_drone_node src/mocap_to_drone_node.cpp)
 
 target_link_libraries(mocap_to_drone_node
   ${catkin_LIBRARIES}
+)
+
+add_executable(mocap_to_drone_node_NED src/mocap_to_drone_node_NED.cpp)
+
+target_link_libraries(mocap_to_drone_node_NED
+  ${catkin_LIBRARIES}
+  Eigen3::Eigen
 )
