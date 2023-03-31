@@ -2,14 +2,14 @@
 <launch>
     <!-- Launch Mavros -->
     
-    
+  <remap from="/vicon/DRONE_Z2/DRONE_Z2" to="/vicon/drone" />  
   <!-- Vion for F46 -->
-  <include file="$(find mavros)/launch/vicon_bridge vicon_f46_V2.launch">
+  <include file="$(find vicon_bridge)/launch/vicon_f46_V3.launch">
   </include>
   
   
-  <include file="$(find mocap_to_mavros_ex)/launch/mocap_to_mavros.launch">
-     <arg name="drone_name" default="Parl1/Parl1" />
-  </include>
-
+  <!-- <include file="$(find mocap_to_mavros_ex)/launch/mocap_to_mavros.launch">	/> -->
+  <!--   <arg name="drone_name" default="drone" />	/> -->
+  <!-- </include>	/> -->
+  
 </launch>
