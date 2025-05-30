@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch Mavros -->
+    <!--<include file="$(find drone_experiments)/launch/drone_exp_mavros.launch"/> -->
+    <arg name="vicon_drone_topic" default="/vicon/drone" />
+    <arg name="external_vision_type" default="vision" />
+
+    <!-- Run mocap to mavros node-->
+
+    <node pkg="mocap_to_mavros" type="mocap_to_drone_node" name="mocap_to_mavros" output="screen">   
+        <param name="vicon_drone_topic" type="string" value="$(arg vicon_drone_topic)" />
+        <param name="external_vision_type" type="string" value="$(arg external_vision_type)" />   
+    </node>
+
+</launch>
+

@@ -8,9 +8,9 @@ project(drone_experiment_tools)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  mocap_to_mavros_ex
+  mocap_to_mavros
   roscpp
-  vicon_bridge
+  mavros
 )
 
 ## System dependencies are found with CMake's conventions

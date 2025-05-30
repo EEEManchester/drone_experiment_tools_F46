@@ -19,6 +19,9 @@ void poseCallback(const geometry_msgs::TransformStamped::ConstPtr& msg) {
 
 
   	pose_pub.publish(poseMavros);
+
+	ROS_INFO_STREAM_THROTTLE(5, "mocap_2_mavros pubs to /mavros/vision_pose/pose");
+	
 	return;
 }
 
@@ -27,14 +30,15 @@ int main(int argc, char *argv[])
 		ros::init(argc, argv, "mocap");
 		ROS_INFO("mocap to mavros node initialized");
 
-		ros::NodeHandle nh;
+		ros::NodeHandle nh("~");
 
-		std::string drone_name, external_vision_type;
+		std::string drone_topic_name, external_vision_type;
 
 		// subscribe to qualisys/drone_name
-		nh.getParam("drone_name",drone_name);
-		ROS_INFO("getting mocap for drone : %s",drone_name.data());
-		ros::Subscriber pose_sub = nh.subscribe("/vicon/"+drone_name, 1, &poseCallback);
+		nh.getParam("vicon_drone_topic",drone_topic_name);
+		ROS_INFO("getting mocap for drone : %s",drone_topic_name.data());
+
+		ros::Subscriber pose_sub = nh.subscribe(drone_topic_name, 1, &poseCallback);
 
 
 		// Publish either vision or mocap topics
@@ -42,6 +46,7 @@ int main(int argc, char *argv[])
 		if(external_vision_type=="vision")
 		{
 			pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/mavros/vision_pose/pose", 1);
+			ROS_INFO("mocap_2_mavros pubs to /mavros/vision_pose/pose");
 		}
 		else if(external_vision_type=="mocap")
 		{

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+    
+  <!-- VICON parameter -->
+  <arg name="vicon_drone_topic" default="/vicon/drone"/>
+  <arg name="external_vision_type" default="vision"/>
+
+  <!-- Launch Mavros -->
+  <include file="$(find mavros)/launch/node.launch">
+      <arg name="fcu_url" default="udp://:14540@127.0.0.1:14557"/>
+      <arg name="gcs_url" default="" />
+      <arg name="tgt_system" default="1" />
+      <arg name="tgt_component" default="1" />
+      <arg name="log_output" default="screen" />
+      <arg name="fcu_protocol" default="v2.0" />
+      <arg name="respawn_mavros" default="false" />
+      <arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
+      <arg name="config_yaml" value="$(find mavros)/launch/px4_config.yaml" />
+  </include>
+
+
+  <!-- map vicon to mavros/vision/pose -->
+  <!-- Optional: override arguments -->
+
+  <!-- Include the mocap launch -->
+  <include file="$(find mocap_to_mavros)/launch/mocap_to_mavros.launch">
+    <arg name="vicon_drone_topic" value="$(arg vicon_drone_topic)" />
+    <arg name="external_vision_type" value="$(arg external_vision_type)" />
+  </include>
+
+
+</launch>

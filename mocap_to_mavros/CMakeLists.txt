@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(drone_offboard_ex)
+project(mocap_to_mavros)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -11,18 +11,17 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   mavros
   roscpp
+  std_msgs
 )
+
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES drone_offboard_example
-#  CATKIN_DEPENDS geometry_msgs mavros roscapp
+#  LIBRARIES mocap_to_mavros
+#  CATKIN_DEPENDS geometry_msgs mavros roscpp std_msgs vicon_bridge
 #  DEPENDS system_lib
 )
-
-###########
-## Build ##
-###########
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
@@ -31,18 +30,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_executable(mocap_to_drone_node src/mocap_to_drone_node.cpp)
 
-add_executable(drone_offboard_node src/off_board.cpp)
+target_link_libraries(mocap_to_drone_node
+  ${catkin_LIBRARIES}
+)
 
-target_link_libraries(
-	drone_offboard_node
-	${catkin_LIBRARIES}
-	)
-
-
-add_executable(drone_offboard_raw_node src/off_board_raw.cpp)
-
-target_link_libraries(
-	drone_offboard_raw_node
-	${catkin_LIBRARIES}
-	)
